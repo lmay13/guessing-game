@@ -32,8 +32,7 @@ int randomV= 49;
 int ccount=0;
 - (IBAction)newGAME:(id)sender {
     randomV=arc4random()% (100);
-    
-
+    // ("TEST");
 }
 
 
