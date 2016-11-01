@@ -8,11 +8,18 @@
 
 #import "ViewController.h"
 
+#include "stdlib.h"
+#include "math.h"
+
 @interface ViewController ()
 {
     int randomV;
+    
     int ccount;
+
 }
+
+
 @property (weak, nonatomic) IBOutlet UITextField *guess;
 @property (weak, nonatomic) IBOutlet UILabel *numCheck;
 @property (weak, nonatomic) IBOutlet UILabel *count;
@@ -24,27 +31,23 @@
 
 @implementation ViewController
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-}
-int randomV= 49;
-int ccount=0;
-- (IBAction)newGAME:(id)sender {
-    randomV=arc4random()% (100);
-    // ("TEST");
 }
 
 
 
 
 - (IBAction)guessButton:(id)sender {
-         int g= [[_guess text] intValue];
+    
     if(ccount<7)
     {
         if([ [_guess text] isEqualToString: @""])
         {
-           randomV= arc4random()% (100);
+           randomV= arc4random()% 100;
             [_numCheck setText: @" Enter a number from 1 to 100"];
             ccount=0;
             NSString *counterString = [NSString stringWithFormat:@"Tries : %d", ccount];
@@ -53,7 +56,8 @@ int ccount=0;
         }
         else
         {
-            
+            ccount++;
+            int g= [[_guess text] intValue];
         
         if(randomV<g)
             {
@@ -77,7 +81,7 @@ int ccount=0;
         if(randomV==g)
             {
                 [_numCheck setText: [NSString stringWithFormat:@"YOU WIN!! %d is correct!", randomV]];
-                [_count setText:[NSString stringWithFormat:@"Tries : %d", ccount]];
+                [_count setText:[NSString stringWithFormat:@"Tries: %d", ccount]];
             }
         }
     }
@@ -85,7 +89,9 @@ int ccount=0;
         if(ccount>=7)
         {
         
-            //Finish!!
+        
+            [_numCheck setText:[NSString stringWithFormat:@" YOU LOSE! Ha Ha!! %d was the number I was looking for ", randomV]];
+            [_count setText:[NSString stringWithFormat:@"Too many tries 8("]];
         
         }
         
@@ -94,6 +100,14 @@ int ccount=0;
     
 }
 
+- (IBAction)newGAme {
+    [_guess setText: @""];
+    [_numCheck setText: @" Enter a number from 1 to100"];
+    [_count setText: @"Tries:0"];
+    ccount = 0;
+    
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
